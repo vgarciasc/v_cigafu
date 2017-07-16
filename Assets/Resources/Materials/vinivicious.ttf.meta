@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8f2a80c77104d824399a4897ccfeb699
+timeCreated: 1500225581
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Vinivicious
+  fontNames:
+  - Vinivicious
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
