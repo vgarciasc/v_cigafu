@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, Trappable, Killable {
+public class Enemy : MonoBehaviour, Trappable, Killable, StopOnShot {
 	Rigidbody2D rb;
 	SpriteRenderer sr;
 	Player player;
 
 	EnemyParticles particles;
 
-	float speed = 1f;
+	public GameObject bloodPrefab;
+
+	float speed = 0.15f;
 	bool can_move = true;
 
 	void Start() {
@@ -35,13 +37,6 @@ public class Enemy : MonoBehaviour, Trappable, Killable {
 		sr.flipX = rb.velocity.x > 0;
 	}
 
-	void OnTriggerEnter2D(Collider2D coll) {
-		GameObject go = coll.gameObject;
-		if (go.tag == "Arrow") {
-			Die();
-		}
-	}
-
 	//interfaces
 
 	public void On_Trap() {
@@ -51,13 +46,34 @@ public class Enemy : MonoBehaviour, Trappable, Killable {
 	}
 
 	public void On_Untrap() {
+		if (shot_freeze) return;
 		can_move = true;
-		rb.bodyType = RigidbodyType2D.Dynamic;
+
+		if (rb != null) {
+			rb.bodyType = RigidbodyType2D.Dynamic;
+		}
 	}
 
-	public void Die() {
+	public IEnumerator Die() {
 		sr.enabled = false;
-		On_Trap();
-		StartCoroutine(particles.death_explosion());
+		GameObject blood = Instantiate(bloodPrefab, this.transform.position, Quaternion.identity);
+		blood.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 180f));
+		yield return particles.death_explosion();
+		Destroy(this.gameObject);
+	}
+
+	bool shot_freeze = false;
+
+	public void Stop_On_Shot() {
+		can_move = false;
+		shot_freeze = true;
+		rb.velocity = Vector2.zero;
+		rb.bodyType = RigidbodyType2D.Static;
+	}
+
+	public void Continue_After_Shot() {
+		shot_freeze = false;
+		can_move = true;
+		rb.bodyType = RigidbodyType2D.Dynamic;
 	}
 }

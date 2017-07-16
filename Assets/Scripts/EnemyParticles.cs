@@ -13,6 +13,6 @@ public class EnemyParticles : MonoBehaviour {
 			explosion.main.startLifetime.constant
 		);
 
-		Destroy(this.gameObject);
+		explosion.Stop();
 	}
 }

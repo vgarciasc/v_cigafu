@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Killable {
-	IEnumerator Die();
+public interface StopOnShot {
+	void Stop_On_Shot();
+	void Continue_After_Shot();
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : MonoBehaviour {
+public class Trap : MonoBehaviour, StopOnShot {
 	bool closed = false;
 	Animator anim;
 
@@ -38,6 +38,17 @@ public class Trap : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.5f);
 
+		yield return new WaitUntil(() => !shot_freeze);
 		closed = false;
+	}
+
+	bool shot_freeze = false;
+
+	public void Stop_On_Shot() {
+		shot_freeze = true;
+	}
+
+	public void Continue_After_Shot() {
+		shot_freeze = false;
 	}
 }

@@ -201,6 +201,10 @@ MonoBehaviour:
     type: 2}
   trapPrefab: {fileID: 1526768853427118, guid: 40ca10762868dc3419af97155cd26462, type: 2}
   rb: {fileID: 50074033654977438}
+  sr: {fileID: 212447831271925540}
+  trapMaxCount: 3
+  trapCount: 3
+  deathScreen: {fileID: 0}
 --- !u!114 &114964485372346232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -250,7 +254,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.5
+    widthMultiplier: 0.25
     widthCurve:
       serializedVersion: 2
       m_Curve:
