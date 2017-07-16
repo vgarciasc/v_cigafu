@@ -66,6 +66,7 @@ public class Projectile : MonoBehaviour {
 	IEnumerator Destroy() {
 		sr.enabled = false;
 		trail.Stop();
+		this.GetComponentInChildren<Collider2D>().enabled = false;
 
 		yield return new WaitForSeconds(
 			trail.main.startLifetime.constant

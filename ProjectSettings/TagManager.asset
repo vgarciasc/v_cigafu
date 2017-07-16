@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Arrow
   - UIIndicatorManager
+  - LevelManager
+  - AudioManager
   layers:
   - Default
   - TransparentFX

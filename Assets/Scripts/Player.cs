@@ -12,7 +12,8 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 	public SpriteRenderer sr;
 	float speed = 10f;
 	bool can_move = true;
-	
+	bool is_dead = false;
+
 	public float trapMaxCount = 3;
 	public float trapCount;
 	public float arrowMaxCount = 1;
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 	}
 
 	void Update() {
+		if (is_dead) return;
+
 		Handle_Cannon_Rotation();
 		Handle_Line_Of_Shot();	
 		Handle_Movement();
@@ -115,5 +118,6 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 
 	void Death() {
 		deathScreen.enabled = true;
+		is_dead = true;
 	}
 }
