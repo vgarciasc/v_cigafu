@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, Trappable, Killable, StopOnShot {
+public class Enemy : MonoBehaviour, Trappable, Killable, StopOnShot, Freezable {
 	Rigidbody2D rb;
 	SpriteRenderer sr;
 	Player player;
@@ -75,5 +75,13 @@ public class Enemy : MonoBehaviour, Trappable, Killable, StopOnShot {
 		shot_freeze = false;
 		can_move = true;
 		rb.bodyType = RigidbodyType2D.Dynamic;
+	}
+
+	public void Start_Freeze() {
+		Stop_On_Shot();
+	}
+
+	public void Stop_Freeze() {
+		Continue_After_Shot();
 	}
 }

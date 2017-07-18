@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LineOfShot : MonoBehaviour {
 	LineRenderer line;
-	Vector3 mouse_pos;
 	public int number;
 	List<Vector2> now_tracking = new List<Vector2>();
 
@@ -12,17 +11,16 @@ public class LineOfShot : MonoBehaviour {
 		line = this.GetComponent<LineRenderer>();
 	}
 	
-	public List<Vector2> Activate(Vector2 position) {
+	public List<Vector2> Activate(Vector2 position, Vector2 direction) {
 		List<Vector2> points = new List<Vector2>() { position };
 		Vector2 point_aux;
 		Vector2 reflection;
 		RaycastHit2D hit;
 		float distance = 30f;
-		Vector2 mouse_pos = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition) - position;
 
 		hit = Physics2D.Raycast(
 			position,
-			mouse_pos,
+			direction,
 			Mathf.Infinity
 		);
 
@@ -81,7 +79,7 @@ public class LineOfShot : MonoBehaviour {
 
 	public void Set_Tracking(Vector2 position) {
 		now_tracking[0] = position;
-		Set_Line(now_tracking);
+		// Set_Line(now_tracking);
 	}
 
 	public void Next_Point_At_Tracking() {

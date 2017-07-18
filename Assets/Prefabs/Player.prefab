@@ -204,7 +204,10 @@ MonoBehaviour:
   sr: {fileID: 212447831271925540}
   trapMaxCount: 3
   trapCount: 3
+  arrowMaxCount: 1
+  arrowCount: 0
   deathScreen: {fileID: 0}
+  freezeScreen: {fileID: 0}
 --- !u!114 &114964485372346232
 MonoBehaviour:
   m_ObjectHideFlags: 1
