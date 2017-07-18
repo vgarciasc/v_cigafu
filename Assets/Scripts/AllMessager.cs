@@ -28,6 +28,8 @@ public class AllMessager : MonoBehaviour {
 	}
 
 	public static void Start_Freeze() {
+		Projectile.freezing = true;
+
 		foreach (GameObject go in GameObject.FindGameObjectsWithTag("Enemy")) {
 			go.GetComponentInChildren<Freezable>().Start_Freeze();
 		}
@@ -40,6 +42,8 @@ public class AllMessager : MonoBehaviour {
 	}
 
 	public static void Stop_Freeze() {
+		Projectile.freezing = false;
+
 		foreach (GameObject go in GameObject.FindGameObjectsWithTag("Enemy")) {
 			go.GetComponentInChildren<Freezable>().Stop_Freeze();
 		}

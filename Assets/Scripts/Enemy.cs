@@ -11,8 +11,8 @@ public class Enemy : MonoBehaviour, Trappable, Killable, StopOnShot, Freezable {
 
 	public GameObject bloodPrefab;
 
+	bool trapped = false;
 	float speed = 0.15f;
-	bool can_move = true;
 
 	void Start() {
 		init();
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, Trappable, Killable, StopOnShot, Freezable {
 	}
 
 	void Handle_Movement() {
-		if (!can_move) return;
+		if (!Can_Move()) return;
 
 		rb.velocity = (player.transform.position - this.transform.position).normalized * speed;
 		sr.flipX = rb.velocity.x > 0;
@@ -39,19 +39,19 @@ public class Enemy : MonoBehaviour, Trappable, Killable, StopOnShot, Freezable {
 
 	//interfaces
 
+	bool Can_Move() {
+		return (!time_frozen && !trapped && !shot_frozen);
+	}
+
 	public void On_Trap() {
-		can_move = false;
+		trapped = true;
 		rb.velocity = Vector2.zero;
 		rb.bodyType = RigidbodyType2D.Static;
 	}
 
 	public void On_Untrap() {
-		if (shot_freeze) return;
-		can_move = true;
-
-		if (rb != null) {
-			rb.bodyType = RigidbodyType2D.Dynamic;
-		}
+		trapped = false;
+		rb.bodyType = RigidbodyType2D.Dynamic;
 	}
 
 	public IEnumerator Die() {
@@ -62,26 +62,27 @@ public class Enemy : MonoBehaviour, Trappable, Killable, StopOnShot, Freezable {
 		Destroy(this.gameObject);
 	}
 
-	bool shot_freeze = false;
-
+	public static bool shot_frozen = false;
+	public static bool time_frozen = false;
 	public void Stop_On_Shot() {
-		can_move = false;
-		shot_freeze = true;
+		shot_frozen = true;
 		rb.velocity = Vector2.zero;
 		rb.bodyType = RigidbodyType2D.Static;
 	}
 
 	public void Continue_After_Shot() {
-		shot_freeze = false;
-		can_move = true;
+		shot_frozen = false;
 		rb.bodyType = RigidbodyType2D.Dynamic;
 	}
 
 	public void Start_Freeze() {
-		Stop_On_Shot();
+		time_frozen = true;
+		rb.velocity = Vector2.zero;
+		rb.bodyType = RigidbodyType2D.Static;
 	}
 
 	public void Stop_Freeze() {
-		Continue_After_Shot();
+		time_frozen = false;
+		rb.bodyType = RigidbodyType2D.Dynamic;
 	}
 }

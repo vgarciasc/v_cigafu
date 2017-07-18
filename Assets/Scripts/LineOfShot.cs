@@ -11,20 +11,39 @@ public class LineOfShot : MonoBehaviour {
 		line = this.GetComponent<LineRenderer>();
 	}
 	
-	public List<Vector2> Activate(Vector2 position, Vector2 direction) {
+	public static List<Vector2> Get_Trajectory(
+		Vector2 position,
+		Vector2 direction,
+		float distance) {
+
 		List<Vector2> points = new List<Vector2>() { position };
 		Vector2 point_aux;
 		Vector2 reflection;
 		RaycastHit2D hit;
-		float distance = 30f;
+		float distance_aux;
 
 		hit = Physics2D.Raycast(
 			position,
 			direction,
-			Mathf.Infinity
+			distance,
+			(1 << LayerMask.NameToLayer("Ricochettable"))
 		);
 
+		if (hit.collider == null) {
+			points.Add(
+				position + direction.normalized * distance
+			);
+			return points;
+		}
+
 		points.Add(hit.point);
+
+		distance_aux = Vector2.Distance(
+			points[points.Count - 1],
+			hit.point
+		);
+
+		distance -= distance_aux;
 		point_aux = hit.point;
 
 		reflection = Vector2.Reflect(
@@ -34,28 +53,24 @@ public class LineOfShot : MonoBehaviour {
 
 		while (true) {
 			hit = Physics2D.Raycast(
-				hit.point,
+				point_aux,
 				reflection,
-				Mathf.Infinity
+				distance,
+				(1 << LayerMask.NameToLayer("Ricochettable"))
 			);
 
-			float distance_aux = Vector2.Distance(
+			if (hit.collider == null) {
+				points.Add(points[points.Count - 1] + reflection.normalized * distance);
+				break;
+			}
+
+			distance_aux = Vector2.Distance(
 				points[points.Count - 1],
 				hit.point
 			);
-			if (distance > distance_aux) {
-				points.Add(hit.point);
-				distance -= distance_aux;
-			}
-			else {
-				Vector2 aux;
-				aux = points[points.Count - 1];
-				points.Add(new Vector2(
-					points[points.Count - 1].x + (hit.point.x - points[points.Count - 1].x) * (distance / distance_aux),
-					points[points.Count - 1].y + (hit.point.y - points[points.Count - 1].y) * (distance / distance_aux)
-				));
-				break;
-			}
+
+			points.Add(hit.point);
+			distance -= distance_aux;
 
 			reflection = Vector2.Reflect(
 				hit.point - point_aux,
@@ -65,7 +80,6 @@ public class LineOfShot : MonoBehaviour {
 			point_aux = hit.point;
 		}
 
-		now_tracking = points;
 		return points;
 	}
 
@@ -77,14 +91,14 @@ public class LineOfShot : MonoBehaviour {
 		}
 	}
 
-	public void Set_Tracking(Vector2 position) {
-		now_tracking[0] = position;
-		// Set_Line(now_tracking);
-	}
+	// public void Set_Tracking(Vector2 position) {
+	// 	now_tracking[0] = position;
+	// 	// Set_Line(now_tracking);
+	// }
 
-	public void Next_Point_At_Tracking() {
-		now_tracking.RemoveAt(0);
-	}
+	// public void Next_Point_At_Tracking() {
+	// 	now_tracking.RemoveAt(0);
+	// }
 
 	public void Deactivate() {
 		line.enabled = false;

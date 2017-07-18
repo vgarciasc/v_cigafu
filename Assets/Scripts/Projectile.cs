@@ -7,138 +7,173 @@ public class Projectile : MonoBehaviour, Freezable {
 	ParticleSystem trail;
 	SpriteRenderer sr;
 
-	LineOfShot line = null;
+	LineOfShot line;
 	Rigidbody2D rb;
 	float velocity_multiplier = 15f;
-	float distance = 150f;
+	float distance = 30f;
 
 	Vector2 last_position;
-	Coroutine current_path = null;
+	Coroutine current_path;
 
-	void Start() {
-		last_position = transform.position;
+	LineRenderer preview_trajectory;
 
-		rb = this.GetComponent<Rigidbody2D>();
-		sr = this.GetComponentInChildren<SpriteRenderer>();
-		trail = this.GetComponentInChildren<ParticleSystem>();
-	}
+	#region start
+		void Start() {
+			last_position = transform.position;
 
-	void FixedUpdate() {
-		if (last_position.x != transform.position.x ||
-			last_position.y != transform.position.y) {
+			init_references();
+		}
 
-			distance -= Vector2.Distance(
-				last_position,
-				transform.position
-			);
+		void init_references() {
+			rb = this.GetComponent<Rigidbody2D>();
+			sr = this.GetComponentInChildren<SpriteRenderer>();
+			trail = this.GetComponentInChildren<ParticleSystem>();
+			preview_trajectory = this.GetComponentInChildren<LineRenderer>();
+		}
+	#endregion
 
-			if (distance <= 0f) {
-				StartCoroutine(Destroy());
+	#region update and handlers
+		void FixedUpdate() {
+			Handle_Max_Distance();
+		}
+
+		void Update() {
+			Handle_Point_to_Velocity(rb.velocity);
+		}
+
+		void Handle_Point_to_Velocity(Vector2 velocity) {
+			if (velocity.magnitude != 0) {
+				float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+				transform.rotation = Quaternion.Euler(0f, 0f, angle - 90);
 			}
 		}
 
-		last_position = transform.position;
-	}
+		void Handle_Max_Distance() {
+			if (last_position.x != transform.position.x ||
+				last_position.y != transform.position.y) {
 
-	void Update() {
-		if (line != null) {
-			line.Set_Tracking(this.transform.position);
+				distance -= Vector2.Distance(
+					last_position,
+					transform.position
+				);
+
+				if (distance <= 0f) {
+					StartCoroutine(Destroy());
+				}
+			}
+
+			last_position = transform.position;
 		}
 
-		if (rb.velocity.magnitude != 0) {
-			float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
-			transform.rotation = Quaternion.Euler(0f, 0f, angle - 90);
-		}
-	}
-	
-	public void Set_Direction(List<Vector2> points) {
-		current_path = StartCoroutine(Manage_Path(points));
-	}
-
-	IEnumerator Manage_Path(List<Vector2> points) {
-		AllMessager.Stop_On_Shot();
-
-		rb = this.GetComponent<Rigidbody2D>();
-
-		for (int i = 0; i < points.Count - 1; i++) {
-			rb.velocity = (points[i + 1] - (Vector2) this.transform.position).normalized * velocity_multiplier;
-			yield return new WaitUntil(() => Are_We_There_Yet(points[i + 1]));
-			yield return new WaitUntil(() => rb.velocity != Vector2.zero);
-			line.Next_Point_At_Tracking();
-		}
-
-		AllMessager.Continue_After_Shot();
-
-		StartCoroutine(Destroy());
-	}
-
-	IEnumerator Destroy() {
-		if (current_path != null) {
-			StopCoroutine(current_path);
-		}
-
-		sr.enabled = false;
-		trail.Stop();
-		this.GetComponentInChildren<Collider2D>().enabled = false;
-
-		yield return new WaitForSeconds(
-			trail.main.startLifetime.constant
-		);
-
-		Destroy(this.gameObject);
-	}
-
-	public void Set_Line_Of_Shot(LineOfShot line) {
-		this.line = line;
-	}
-
-	void OnTriggerEnter2D(Collider2D coll) {
-		GameObject go = coll.gameObject;
-
-		if (go.layer == LayerMask.NameToLayer("Ricochettable")) {
-			RaycastHit2D hit = Physics2D.Raycast(
-				transform.position,
+		void Handle_Preview_Trajectory() {
+			var points = LineOfShot.Get_Trajectory(
+				this.transform.position,
 				rb.velocity,
-				Mathf.Infinity
+				2.5f
 			);
 
-			float magnitude = rb.velocity.magnitude;
-			rb.velocity = Vector2.Reflect(
-				hit.point - (Vector2) transform.position,
-				hit.normal
-			).normalized * magnitude;
+			preview_trajectory.enabled = true;
+			preview_trajectory.positionCount = points.Count;
+			for (int i = 0; i < points.Count; i++) {
+				preview_trajectory.SetPosition(i, points[i]);
+			}
+		}
+	#endregion
+
+	#region destroy
+		IEnumerator Destroy() {
+			if (current_path != null) {
+				StopCoroutine(current_path);
+			}
+
+			AllMessager.Continue_After_Shot();
+
+			sr.enabled = false;
+			preview_trajectory.enabled = false;
+			trail.Stop();
+			this.GetComponentInChildren<Collider2D>().enabled = false;
+
+			yield return new WaitForSeconds(
+				trail.main.startLifetime.constant
+			);
+
+			Destroy(this.gameObject);
+		}
+	#endregion
+
+	#region arrow
+		public void Start_Shot(Vector2 direction) {
+			AllMessager.Stop_On_Shot();
+
+			if (rb == null) {
+				init_references();
+			}
+
+			Set_Velocity(direction.normalized * velocity_multiplier);
 		}
 
-		if (go.tag == "Enemy") {
-			Enemy enemy = go.GetComponentInChildren<Enemy>();
-			StartCoroutine(Kill_Killable(enemy));
+		public void Set_Line_Of_Shot(LineOfShot line) {
+			this.line = line;
 		}
-	}
 
-	IEnumerator Kill_Killable(Killable target) {
-		Vector2 rb_aux = rb.velocity;
-		rb.velocity = Vector2.zero;
+		void Set_Velocity(Vector2 velocity) {
+			if (freezing) {
+				Handle_Point_to_Velocity(velocity);
+				rb.velocity = Vector2.zero;
+				last_velocity = velocity;
+			}
+			else {
+				rb.velocity = velocity;
+			}
+		}
+	#endregion
 
-		yield return target.Die();
-		yield return new WaitUntil(() => !freezing);
+	#region collider
+		void OnTriggerEnter2D(Collider2D coll) {
+			GameObject go = coll.gameObject;
 
-		rb.velocity = rb_aux;
-	}
+			if (go.layer == LayerMask.NameToLayer("Ricochettable")) {
+				RaycastHit2D hit = Physics2D.Raycast(
+					transform.position,
+					rb.velocity,
+					Mathf.Infinity
+				);
 
-	bool Are_We_There_Yet(Vector2 destination) {
-		return Vector2.Distance(destination, this.transform.position) < 0.25f;
-	}
+				float magnitude = rb.velocity.magnitude;
+				rb.velocity = Vector2.Reflect(
+					hit.point - (Vector2) transform.position,
+					hit.normal
+				).normalized * magnitude;
+			}
 
-	Vector2 last_velocity;
-	bool freezing = false;
-	public void Start_Freeze() {
-		freezing = true;
-		last_velocity = rb.velocity;
-		rb.velocity = Vector2.zero;
-	}
+			if (go.tag == "Enemy") {
+				Enemy enemy = go.GetComponentInChildren<Enemy>();
+				StartCoroutine(Kill_Killable(enemy));
+			}
+		}
 
-	public void Stop_Freeze() {
-		freezing = false;
-		rb.velocity = last_velocity;
-	}
+		IEnumerator Kill_Killable(Killable target) {
+			Vector2 rb_aux = rb.velocity;
+			Set_Velocity(Vector2.zero);
+
+			yield return target.Die();
+
+			Set_Velocity(rb_aux);
+		}
+	#endregion
+
+	#region freeze
+		Vector2 last_velocity;
+		public static bool freezing = false;
+		public void Start_Freeze() {
+			freezing = true;
+			last_velocity = rb.velocity;
+			rb.velocity = Vector2.zero;
+		}
+
+		public void Stop_Freeze() {
+			freezing = false;
+			rb.velocity = last_velocity;
+		}
+	#endregion
 }

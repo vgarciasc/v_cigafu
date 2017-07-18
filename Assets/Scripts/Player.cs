@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 	public float arrowCount;
 
 	public Image deathScreen;
-	public Image freezeScreen;
+	public GameObject freezeScreen;
 
 	void Start() {
 		trapCount = trapMaxCount;
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 			if (!freezing) AllMessager.Start_Freeze();
 			else AllMessager.Stop_Freeze();
 			freezing = !freezing;
-			freezeScreen.enabled = freezing;
+			freezeScreen.SetActive(freezing);
 		}
 	}
 
@@ -71,8 +71,10 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 
 	void Handle_Line_Of_Shot() {
 		if (Input.GetMouseButton(0)) {
-			line.Set_Line(line.Activate(cat.position,
-				Camera.main.ScreenToWorldPoint(Input.mousePosition) - cat.position
+			line.Set_Line(
+				LineOfShot.Get_Trajectory(cat.position,
+				Camera.main.ScreenToWorldPoint(Input.mousePosition) - cat.position,
+				30f
 			));
 		}
 		if (Input.GetMouseButtonUp(0)) {
@@ -85,14 +87,18 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 			GameObject go = Instantiate(projectilePrefab, cat.position, Quaternion.identity);
 			Projectile prj = go.GetComponent<Projectile>();
 			List<Vector2> aux = new List<Vector2>();
-			aux.AddRange(line.Activate(cat.position,
-				Camera.main.ScreenToWorldPoint(Input.mousePosition) - cat.position
+			aux.AddRange(
+				LineOfShot.Get_Trajectory(cat.position,
+				Camera.main.ScreenToWorldPoint(Input.mousePosition) - cat.position,
+				30f
 			));
 			prj.Set_Line_Of_Shot(line);
 			arrowCount --;
 
 			line.Deactivate();
-			prj.Set_Direction(aux);
+			prj.Start_Shot(
+				Camera.main.ScreenToWorldPoint(Input.mousePosition) - cat.position
+			);
 		}
 	}
 
