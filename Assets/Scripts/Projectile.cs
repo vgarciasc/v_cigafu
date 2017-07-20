@@ -81,7 +81,7 @@ public class Projectile : MonoBehaviour, Freezable {
 	#endregion
 
 	#region destroy
-		IEnumerator Destroy() {
+		public IEnumerator Destroy() {
 			if (current_path != null) {
 				StopCoroutine(current_path);
 			}

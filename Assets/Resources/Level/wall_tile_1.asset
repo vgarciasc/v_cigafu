@@ -8,8 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94299dde32a3c124d9a2e57983164d1e, type: 3}
-  m_Name: Level4
+  m_Script: {fileID: 11500000, guid: e388f339b753a4346aa85ecc7e306265, type: 3}
+  m_Name: wall_tile_1
   m_EditorClassIdentifier: 
-  enemies:
-  - {x: 0, y: 0}
+  name: 
+  sprite: {fileID: 21300000, guid: 8525969e55378de44b01512088092364, type: 3}
+  color: {r: 0.5147059, g: 0.5147059, b: 0.5147059, a: 1}

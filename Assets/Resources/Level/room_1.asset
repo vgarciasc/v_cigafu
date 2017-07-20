@@ -1,0 +1,275 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6cabfb87ff4698459cbb39479c1674c, type: 3}
+  m_Name: room_1
+  m_EditorClassIdentifier: 
+  levelEnemyData: {fileID: 11400000, guid: 2f49c0b72a1baeb4792179b048667512, type: 2}
+  roomToTheLeft: {fileID: 0}
+  roomToTheRight: {fileID: 11400000, guid: 4b6d40b5aa336614d82428a7f67deece, type: 2}
+  roomUp: {fileID: 0}
+  roomDown: {fileID: 0}
+  wallsTop:
+  - position: {x: 5.982467, y: 3.964694}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: 3.982467, y: 3.964694}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -2.017533, y: 3.964694}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -0.017532945, y: 3.964694}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: 1.9824672, y: 3.964694}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -4.017533, y: 3.964694}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -6.017533, y: 3.964694}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  wallsBottom:
+  - position: {x: -6.017533, y: -4.035306}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: -2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -4.017533, y: -4.035306}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: -2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: 1.9824672, y: -4.035306}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: -2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -0.017532945, y: -4.035306}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: -2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -2.017533, y: -4.035306}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: -2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: 3.982467, y: -4.035306}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: -2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: 5.982467, y: -4.035306}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: -2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  wallsLeft:
+  - position: {x: -8.017533, y: 1.9646941}
+    frontPosition: {x: 0.0000019073486, y: -0.000000834465}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -8.017533, y: -0.03530574}
+    frontPosition: {x: 0.0000019073486, y: 0.00000023841858}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 3
+  - position: {x: -8.017533, y: -2.0353057}
+    frontPosition: {x: 0.0000019073486, y: 0.00000023841858}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  wallsRight:
+  - position: {x: 7.982467, y: -2.0353057}
+    frontPosition: {x: -0.0000023841858, y: 0.00000023841858}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: 7.982467, y: -0.03530574}
+    frontPosition: {x: -0.0000023841858, y: 0.00000023841858}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: porta
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 4
+  - position: {x: 7.982467, y: 1.9646941}
+    frontPosition: {x: -0.0000023841858, y: -0.00000035762787}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+    tile_sprite_name: wall_tile2
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  wallsCorners:
+  - position: {x: 7.982467, y: 3.964694}
+    frontPosition: {x: 0.00000047683716, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: 0.707109, w: 0.7071046}
+    tile_sprite_name: wall_tile2_triangle
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: 7.982467, y: -4.035306}
+    frontPosition: {x: -0.0000019073486, y: 0.0000009536743}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: 0.70710677, w: -0.7071069}
+    tile_sprite_name: wall_tile2_triangle4
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -8.017533, y: -4.0353065}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: 0.707103, w: 0.7071106}
+    tile_sprite_name: wall_tile2_triangle2
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -8.017533, y: 3.964694}
+    frontPosition: {x: 0.0000019073486, y: -0.0000009536743}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: 0.7071066, w: -0.70710707}
+    tile_sprite_name: wall_tile2_triangle3
+    tile_sprite_color: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: 7.982467, y: 3.964694}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2_triangle4
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -8.009533, y: -4.035306}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0.0000019967554, w: 1}
+    tile_sprite_name: wall_tile2_triangle3
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: 7.982467, y: -4.035306}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: 1, w: 0.0000032037497}
+    tile_sprite_name: wall_tile2_triangle2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0
+  - position: {x: -8.017533, y: 3.964694}
+    frontPosition: {x: 0, y: 0}
+    scale: {x: 2, y: 2}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    tile_sprite_name: wall_tile2_triangle2
+    tile_sprite_color: {r: 0.33088237, g: 0.33088237, b: 0.33088237, a: 1}
+    component_sprite_name: 
+    component_sprite_color: {r: 1, g: 1, b: 1, a: 1}
+    door: 0

@@ -69,6 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4679809960463880}
   - component: {fileID: 114497881126243618}
+  - component: {fileID: 114717221971944196}
   - component: {fileID: 58870458893538182}
   - component: {fileID: 50074033654977438}
   - component: {fileID: 58675253475101628}
@@ -111,8 +112,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1883368513962752}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6893202, y: 1.22, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.06684524, y: 0.20529914, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4524586216046842}
@@ -175,7 +176,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1883368513962752}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -202,12 +203,24 @@ MonoBehaviour:
   trapPrefab: {fileID: 1526768853427118, guid: 40ca10762868dc3419af97155cd26462, type: 2}
   rb: {fileID: 50074033654977438}
   sr: {fileID: 212447831271925540}
-  trapMaxCount: 3
-  trapCount: 3
-  arrowMaxCount: 1
-  arrowCount: 0
+  itemManager: {fileID: 114717221971944196}
   deathScreen: {fileID: 0}
   freezeScreen: {fileID: 0}
+--- !u!114 &114717221971944196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1883368513962752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3a0f6e41a2521439bf5f5567607f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trapMaxCount: 3
+  trapCount: 0
+  arrowMaxCount: 1
+  arrowCount: 0
 --- !u!114 &114964485372346232
 MonoBehaviour:
   m_ObjectHideFlags: 1

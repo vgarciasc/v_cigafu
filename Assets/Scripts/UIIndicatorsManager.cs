@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class UIIndicatorsManager : MonoBehaviour {
 
-	Player player;
+	PlayerItemManager playerItems;
 
 	public Text	trapCount;
 	public Text	enemiesCount;
 	public Text	arrowCount;
 
 	void Start() {
-		player = (Player) HushPuppy.safeFindComponent("Player", "Player");
+		playerItems = (PlayerItemManager) HushPuppy.safeFindComponent("Player", "PlayerItemManager");
 	}
 
 	void Update() {
 		trapCount.text = "x" + 
-			(player.trapMaxCount -
+			(playerItems.trapMaxCount -
 			GameObject.FindGameObjectsWithTag("Trap").Length).ToString();
 		enemiesCount.text = "x" + 
 			(GameObject.FindGameObjectsWithTag("Enemy").Length).ToString();
 		arrowCount.text = "x" + 
-			(player.arrowCount).ToString();
+			(playerItems.arrowCount).ToString();
 	}
 
 }

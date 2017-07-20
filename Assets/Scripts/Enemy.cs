@@ -59,7 +59,18 @@ public class Enemy : MonoBehaviour, Trappable, Killable, StopOnShot, Freezable {
 		GameObject blood = Instantiate(bloodPrefab, this.transform.position, Quaternion.identity);
 		blood.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 180f));
 		yield return particles.death_explosion();
+
+		if (GameObject.FindGameObjectsWithTag("Enemy").Length == 1) {
+			//last one to die
+			ExplorerManager.Get_Explorer_Manager().Clear_Current_Room();
+		}
+
 		Destroy(this.gameObject);
+	}
+
+	public static void Reset_Frozen() {
+		shot_frozen = false;
+		time_frozen = false;
 	}
 
 	public static bool shot_frozen = false;

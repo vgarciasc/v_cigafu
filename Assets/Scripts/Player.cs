@@ -14,18 +14,11 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 	bool can_move = true;
 	bool is_dead = false;
 
-	public float trapMaxCount = 3;
-	public float trapCount;
-	public float arrowMaxCount = 1;
-	public float arrowCount;
+	[SerializeField]
+	PlayerItemManager itemManager;
 
 	public Image deathScreen;
 	public GameObject freezeScreen;
-
-	void Start() {
-		trapCount = trapMaxCount;
-		arrowCount = arrowMaxCount;
-	}
 
 	void Update() {
 		if (is_dead) return;
@@ -83,7 +76,7 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 	}
 
 	void Handle_Shooting() {
-		if (Input.GetMouseButtonUp(0) && arrowCount > 0) {
+		if (Input.GetMouseButtonUp(0) && itemManager.arrowCount > 0) {
 			GameObject go = Instantiate(projectilePrefab, cat.position, Quaternion.identity);
 			Projectile prj = go.GetComponent<Projectile>();
 			List<Vector2> aux = new List<Vector2>();
@@ -93,7 +86,7 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 				30f
 			));
 			prj.Set_Line_Of_Shot(line);
-			arrowCount --;
+			itemManager.arrowCount --;
 
 			line.Deactivate();
 			prj.Start_Shot(
@@ -103,11 +96,11 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 	}
 
 	void Handle_Put_Trap() {
-		if (Input.GetMouseButtonDown(1) && trapCount > 0) {
+		if (Input.GetMouseButtonDown(1) && itemManager.trapCount > 0) {
 			GameObject go = Instantiate(trapPrefab,
 				(Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition),
 				Quaternion.identity);
-			trapCount--;
+			itemManager.trapCount--;
 		}
 	}
 
@@ -143,5 +136,14 @@ public class Player : MonoBehaviour, Trappable, StopOnShot {
 	void Death() {
 		deathScreen.enabled = true;
 		is_dead = true;
+	}
+
+	public bool can_change_rooms = true;
+	public IEnumerator Cooldown_Change_Rooms() {
+		can_change_rooms = false;
+
+		yield return new WaitForSeconds(0.25f);
+
+		can_change_rooms = true;
 	}
 }
